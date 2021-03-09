@@ -1,0 +1,81 @@
+\documentclass{article}
+\usepackage{math}
+
+\title{\sc Poisson's Equation}
+\date{}
+
+\begin{document}
+\maketitle
+
+Poisson's equation is
+\begin{equation}
+  \nabla^2 u(r) = v(r),
+\end{equation}
+where the solution is generally required in some simply-connected volume bounded by a closed surface $S$.  Dirichlet boundary conditions specify $u$ on the boundary of the surface.  Neumann boundary conditions specify the normal gradient $\nabla u \cdot dS$.
+
+For example, in 1-D, suppose
+\begin{equation}
+  \frac{d^2u(x)}{dx^2} = v(x),
+\end{equation}
+for $x_l \le x \le x_h$, subject to $u(x_l)=u_l$ and $u(x_h)=u_h$.
+
+To numerically solve the above equation, we first discretize to form grid points
+\begin{equation}
+  x_i = x_l + \frac{i(x_h-x_l)}{n+1}, i=1,...,n.
+\end{equation}
+We approximate the differential term using central differences
+\begin{equation}
+  \frac{d^2u(x_i)}{dx^2} \approx \frac{u_{i-1}-2u_i+u_{i+1}}{(\delta x)^2},
+\end{equation}
+where $\delta x = (x_h-x_l)/(n+1)$.  We then have
+\begin{equation}
+  u_{i-1}-2u_i+u_{i+1} = v_i (\delta x)^2, i=1,...,n,
+\end{equation}
+where $v_i=v(x_i)$.  The boundary conditions are $u_0=u_l$ and $u_{n+1}=u_h$.
+
+We can write the formulation above in matrix form
+\begin{equation}
+  Au = w,
+\end{equation}
+where $u=(u_1,u_2,...,u_n)$, $w=(v_1(\delta x)^2-u_l,v_2(\delta x)^2,v_3(\delta x)^2,...,v_{n-1}(\delta x)^2,v_n(\delta x)^2-u_h)$, and for $n=6$,
+\begin{equation}
+  A =
+\begin{pmatrix}
+-2&1&0&0&0&0\\
+1&-2&1&0&0&0\\
+0&1&-2&1&0&0\\
+0&0&1&-2&1&0&\\
+0&0&0&1&-2&1
+\end{pmatrix}.
+\end{equation}
+
+The matrix $A$ is tri-diagonal, and can be solved more efficiently $O(n)$ than by direct inversion $O(n^3)$.  Let $a, b, c$ be the below-diagonal, on-diagonal, above-diagonal elements of $A$.  Each row of the linear system is
+\begin{equation}
+  a_i u_{i-1} + b_i u_i + c_i u_{i+1} = w_i, i=1,...,n,
+\end{equation}
+where $a_1=c_n=0$.  Assume the solution is of the form
+\begin{equation}
+  u_{i+1} = x_i u_i + y_i.
+\end{equation}
+Then
+\begin{equation}
+  a_i u_{i-1} + b_i u_i + c_i (x_i u_i + y_i) = w_i.
+\end{equation}
+Solving for $u_i$ gives
+\begin{equation}
+  u_i = -\frac{a_i u_{i-1}}{b_i + c_i x_i} + \frac{w_i - c_i y_i}{b_i + c_i x_i}.
+\end{equation}
+Writing the assume solution for $u_i$ gives
+\begin{equation}
+  u_i = x_{i-1} u_{i-1} + y_{i-1}.
+\end{equation}
+Then pattern matching the above two equations we have
+\begin{align}
+  x_{i-1} & = -\frac{a_i}{b_i + c_i x_i} \\
+  y_{i-1} & = \frac{w_i - c_i y_i}{b_i + c_i x_i}.
+\end{align}
+To solve the system, we first compute $x_i$ and $y_i$ for $i=n-1,...,0$, noting that $x_0=0$ and $y_0=(w_1-c_1y_1)/(b_1+c_1x_1)$.  Then we compute $u_i$ for $i=1,2,...,n$.
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}

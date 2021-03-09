@@ -1,0 +1,50 @@
+
+Begin optimization report for: main(int, char **)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at poisson_mpi_persistent.c(40,5)
+   remark #15300: LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at poisson_mpi_persistent.c(40,5)
+<Remainder>
+LOOP END
+
+LOOP BEGIN at poisson_mpi_persistent.c(55,3)
+   remark #25460: No loop optimizations reported
+LOOP END
+
+LOOP BEGIN at poisson_mpi_persistent.c(63,3)
+   remark #25460: No loop optimizations reported
+
+   LOOP BEGIN at poisson_mpi_persistent.c(64,5)
+      remark #15300: LOOP WAS VECTORIZED
+   LOOP END
+LOOP END
+
+LOOP BEGIN at poisson_mpi_persistent.c(81,8)
+   remark #25460: No loop optimizations reported
+
+   LOOP BEGIN at poisson_mpi_persistent.c(95,5)
+      remark #25460: No loop optimizations reported
+
+      LOOP BEGIN at poisson_mpi_persistent.c(96,7)
+         remark #15300: LOOP WAS VECTORIZED
+      LOOP END
+
+      LOOP BEGIN at poisson_mpi_persistent.c(96,7)
+      <Remainder>
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at poisson_mpi_persistent.c(106,5)
+      remark #25460: No loop optimizations reported
+
+      LOOP BEGIN at poisson_mpi_persistent.c(107,7)
+         remark #15300: LOOP WAS VECTORIZED
+      LOOP END
+   LOOP END
+LOOP END
+===========================================================================

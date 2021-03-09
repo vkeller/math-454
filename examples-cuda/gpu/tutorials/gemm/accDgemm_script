@@ -1,0 +1,11 @@
+rm -f accGEMMresults_ea1.txt
+accGEMM 1000 > accGEMMresults_ea1.txt
+accGEMM 2000 >> accGEMMresults_ea1.txt
+accGEMM 3000 >> accGEMMresults_ea1.txt
+accGEMM 4000 >> accGEMMresults_ea1.txt
+accGEMM 5000 >> accGEMMresults_ea1.txt
+accGEMM 6000 >> accGEMMresults_ea1.txt
+accGEMM 7000 >> accGEMMresults_ea1.txt
+accGEMM 8000 >> accGEMMresults_ea1.txt
+accGEMM 9000 >> accGEMMresults_ea1.txt
+accGEMM 10000 >> accGEMMresults_ea1.txt

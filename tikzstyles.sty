@@ -1,0 +1,97 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{tikzstyles}[2017/02/08 Tikz styles for SCITAS]
+
+\RequirePackage{tikz}
+\RequirePackage{color}
+
+\usetikzlibrary{positioning,shapes,shadows,arrows,fit,decorations.pathreplacing}
+
+\tikzset{>=latex}
+
+% Color definitions
+\definecolor{blue0}{HTML}{002255}
+\definecolor{blue1}{HTML}{003380}
+\definecolor{blue2}{HTML}{0044AA}
+\definecolor{blue3}{HTML}{0055D4}
+\definecolor{blue4}{HTML}{0066FF}
+\definecolor{blue5}{HTML}{2A7FFF}
+\definecolor{blue6}{HTML}{5599FF}
+\definecolor{blue7}{HTML}{80B3FF}
+\definecolor{blue8}{HTML}{AACCFF}
+\definecolor{blue9}{HTML}{D5E5FF}
+
+\definecolor{yellowbrown0}{HTML}{554400}
+\definecolor{yellowbrown1}{HTML}{806600}
+\definecolor{yellowbrown2}{HTML}{AA8800}
+\definecolor{yellowbrown3}{HTML}{D4AA00}
+\definecolor{yellowbrown4}{HTML}{FFCC00}
+\definecolor{yellowbrown5}{HTML}{FFD42A}
+\definecolor{yellowbrown6}{HTML}{FFDD55}
+\definecolor{yellowbrown7}{HTML}{FFE680}
+\definecolor{yellowbrown8}{HTML}{FFEEAA}
+\definecolor{yellowbrown9}{HTML}{FFF6D5}
+
+% Styles
+
+\tikzset{
+	node split/.style={
+		rectangle split,
+		rectangle split parts=2,
+		thick,
+		draw=white,
+		fill=blue9,
+		font=\sffamily,
+		minimum size=6mm,
+		minimum width=1cm,
+	},
+	switch/.style={
+		rectangle,minimum size=8mm,rounded corners=3mm,
+		minimum width=1cm,
+		fill=gray!15!white,
+		font=\sffamily,
+		text height = height("y"), % Correct vertical alignment
+		text depth = 0pt,
+	},
+	memory/.style={
+		rectangle,
+		fill=blue9,
+		font=\sffamily,
+		minimum height = 0.6cm,
+		inner sep = 4pt,
+		minimum width=4cm,
+		text height = height("y"), % Correct vertical alignment
+		text depth = 0pt,
+	},
+	node/.style={
+		rectangle,
+		fill=blue9,
+		font=\sffamily,
+		minimum size=6mm,
+		minimum width=1cm,
+	},
+	master/.style={
+		rectangle,
+		fill=gray!30!white,
+		font=\sffamily,
+		minimum size=6mm,
+		minimum width=1cm,
+	},
+	internet/.style={
+		text width=1.5cm,
+		cloud, cloud puffs=12, cloud ignores aspect,
+		minimum height = 1.2cm,
+		fill=blue7
+	},
+	stage/.style={
+		rectangle, rounded corners = 3mm,
+		draw = black,
+		thick,
+		minimum width = 5.5cm,
+		align = center
+	},
+	stage highlight/.style={ stage, draw = blue6 },
+	point/.style={ inner sep=1pt, circle, draw, black, fill=black },
+	decision/.style={ diamond, draw, aspect = 2, align = center}
+}
+
+\newcommand{\stagename}[1]{\textbf{#1} \\[3pt]}

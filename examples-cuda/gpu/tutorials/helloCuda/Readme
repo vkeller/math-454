@@ -1,0 +1,37 @@
+This directory contains and example of cuda program helloCuda.cu
+
+
+Program Compilation:
+--------------------
+   nvcc -o helloCuda helloCuda.cu -arch sm_20
+
+Program Execution:
+------------------
+CUDA program should be executed on the GPU-enabled machine.
+To request a node with GPU, execute the following commands at the SCC prompt:
+   qsh -V -l gpus=1
+   module load cuda/5.0
+
+Users participating in Medical Campus project, should request gpu-enabled node providing their group name, e.g. :
+   qsh -P scv -V -l gpus=1
+   module load cuda/5.0
+
+When the terminal window appears, to execute the program, type:
+   ./helloCuda
+
+
+Contact Information:
+--------------------
+
+Katia Oleinik: koleinik@bu.edu
+
+Operating System Requirements:
+------------------------------
+
+The examples presented in this directory were written for Linux OS, but should work on any OS where 
+- c and nvcc compilers available
+- NVIDIA's GPU(s) with compute capability 2.0 and higher 
+   
+Updates:
+--------
+2013-06-01: The first version of Intro to GPU programming tutorial created

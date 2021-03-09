@@ -1,0 +1,111 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{a4wide}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{pcptex}
+\usepackage{xspace}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},   
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C
+}
+
+\begin{document}
+
+\corrigetitle{1}
+
+\begin{exercise}[Computational complexities]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+
+	\item What is the problem complexity ? (``big O'' notation). Assume the number of steps is proportional to N. 
+
+
+
+
+	\item compute the arithmetic complexity of the algorithm per step. 
+
+
+
+	\item compute the computational complexity (``big O'' notation) of the algorithm (in {\bf time})
+
+
+
+	\item compute the computational complexity (``big O'' notation) of the algorithm (in {\bf space})
+
+
+
+	\item is this problem worth to be parallelized ? Why ?
+
+
+
+	\item what is the computation time for one iteration step on a deneb core ?
+
+
+
+\end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}[Theoretical analysis : Amdhal's law]
+
+  $~$ % ugly trick to get a newline
+
+\begin{enumerate}[label=(\alph*)]
+	\item compute the message size that must be sent and received at each iteration step
+
+	\item what is the communication time on an infiniband intercommunication network (such as deneb) per iteration step ? You can use Table~\ref{nettab}
+
+	\item what is the communication time over computation time ratio ?
+
+	\item give an estimation of $f$ (the sequential part of the code that can not be parallelized). 
+
+	\item What is the upper bound of the speed up in the case of Amdahl's law ? 
+
+\end{enumerate}
+  
+
+\end{exercise}
+
+
+
+\begin{exercise}[Theoretical analysis : Gustafsson's law]
+
+  $~$ % ugly trick to get a newline
+
+\begin{enumerate}[label=(\alph*)]
+	\item What would be the maximum efficiency of this parallel 2D poisson solver at 128 processors ?
+
+\end{enumerate}
+  
+
+\end{exercise}
+
+
+\end{document}
+

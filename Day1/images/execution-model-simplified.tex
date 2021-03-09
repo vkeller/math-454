@@ -1,0 +1,43 @@
+% Slide 72
+\begin{tikzpicture}[yscale = 0.7, xscale = 0.9]
+
+\draw[very thick, ->] (0,8.5) node[above right] {Master thread} -- (0,-1);
+
+\pgfmathsetmacro{\forkheight}{7}
+
+\foreach \x in {1, 2, ..., 5} {
+	\draw[blue2, ->, thick] (0,{\forkheight + 0.5})
+		to[out = -90, in = 180] (0.5, \forkheight)
+		-- ({\x - 0.5}, \forkheight)
+		to[out=0, in = 90] (\x, {\forkheight-0.5}) -- (\x, {\forkheight - 2});
+
+	\draw[blue2, thin] (\x, {\forkheight - 2})
+		to[out = -90, in = 0] ({\x - 0.5}, {\forkheight - 2.25})
+		-- (0.5, {\forkheight - 2.25})
+		to[out = 180, in = 90] (0, {\forkheight - 2.5});
+}
+
+\node[point, label={left:Fork}] at (0, {\forkheight + 0.5}) {};
+\node[point, label={left:Join}] at (0, {\forkheight - 2.5}) {};
+\node[blue2, anchor = south, yshift = 0.1cm] at (4, \forkheight) {Worker threads};
+
+\pgfmathsetmacro{\forkheight}{2.5}
+
+\foreach \x in {1, 2, 3} {
+	\draw[blue2, ->, thick] (0,{\forkheight + 0.5})
+		to[out = -90, in = 180] (0.5, \forkheight)
+		-- ({\x - 0.5}, \forkheight)
+		to[out=0, in = 90] (\x, {\forkheight-0.5}) -- (\x, {\forkheight - 2});
+
+	\draw[blue2, thin] (\x, {\forkheight - 2})
+		to[out = -90, in = 0] ({\x - 0.5}, {\forkheight - 2.25})
+		-- (0.5, {\forkheight - 2.25})
+		to[out = 180, in = 90] (0, {\forkheight - 2.5});
+}
+
+\node[blue2, anchor = south, yshift = 0.1cm] at (2, \forkheight) {Worker threads};
+
+\node[point, label={left:Fork}] at (0, {\forkheight + 0.5}) {};
+\node[point, label={left:Join}] at (0, {\forkheight - 2.5}) {};
+
+\end{tikzpicture}

@@ -1,0 +1,64 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{a4wide}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{pcptex}
+\usepackage{xspace}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkred}{rgb}{.68,0,.06} % ae0010
+
+\begin{document}
+
+\enoncetitle{7}
+
+% ------------------------------------------------------------------------
+
+\begin{exercise}[Hybrid Implementation of the 2D Poisson Solver using MPI/OpenMP]
+
+Based on your previous experience with OpenMP, parallelize the local heavy loops of your MPI implementation using OpenMP pragmas. 
+
+\end{exercise}
+
+
+
+\begin{exercise}[Prepare a project proposal to get computing time on a large cluster]
+
+After four weeks, you followed all the technical steps that every CSE engineer or researcher must fulfill in order to have her/his project technically accepted on a large nation-wide supercomputer. A very last step is required on the road to a Nature publication: a good project proposal that has chances to be accepted. So far, you learned how to:
+
+\begin{itemize}
+	\item {debug your serial 2D Poisson solver (serie 4)}
+	\item {profile your serial 2D Poisson solver (serie 4)}
+	\item {optimize a serial version of your 2D Poisson solver (serie 4)}
+	\item {parallelize some of the heavy loops of your serial 2D Poisson solver using the OpenMP paradigm (serie 4)}
+	\item {benchmark a parallel code, specially your OpenMP version of the 2D Poisson solver (serie 4)}
+	\item {parallelize your 2D Poisson solver using the MPI library in order to run it on a cluster and thus, compute larger datasets (serie 5)}
+	\item {parallelize the Input/Output of your MPI version of your 2D Poisson solver using MPI-IO (serie 6)}
+	\item {make your MPI version with MPI-IO of your 2D Poisson solver a hybrid MPI/OpenMP application (serie 7)}
+\end{itemize}
+
+Additionnaly, you also learned :
+
+\begin{itemize}
+	\item {to submit a job on a SLURM managed cluster (serie 1) }
+	\item {to draw nice log-log graphs using \texttt{R} (serie 2) }
+\end{itemize}
+
+Now you are ready to benchmark the MPI/OpenMP+MPI-IO version of your 2D Poisson problem and prepare a project proposal. This is the goal of this last exercise. Fill in the \texttt{poisson-project-proposal.tex} file with the missing parts :
+
+\begin{itemize}
+	\item {Weak scaling}
+	\item {Strong scaling}
+	\item {Prediction at scale}
+\end{itemize}
+
+You can use the Bellatrix cluster to benchmark your code. Try to keep the running times above 2 minutes but below 5 (play with the size of the problem). The benchmark can be automatized within your SLURM submission script.
+\\
+
+\textcolor{dkred}{A real project proposal is carefully parsed and judged on the basis of its scientific goals. If you submit the result of this exercise, it will be rejected in any computing center because of the lack of scientific content. We are not in the Sixties anymore. But you'll get a good grade if you follow the same steps for your own project. }
+
+
+\end{exercise}
+
+\end{document}

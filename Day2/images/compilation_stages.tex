@@ -1,0 +1,17 @@
+% Slide 34
+\begin{tikzpicture}
+
+\node[stage] (Preproc) at (0,0) {\stagename{Preprocessor} \texttt{gcc -E file.c -o file.i}};
+\node[stage] (Compiler) at (0,-2) {\stagename{Compiler} \texttt{gcc -S file.i -o file.s}};
+\node[stage] (Assembler) at (0,-4) {\stagename{Assembler} \texttt{gcc -c file.s -o file.o}};
+\node[stage] (Linker) at (0,-6) {\stagename{Linker} \texttt{gcc file.o -lexample -o file}};
+
+\node[stage highlight, right of = Assembler, yshift = -1cm, xshift = 5cm, minimum width = 4cm] (Lib) {\stagename{External library} libexample.so};
+
+
+\draw[->] (Preproc) -- (Compiler);
+\draw[->] (Compiler) -- (Assembler);
+\draw[->] (Assembler) -- (Linker);
+\draw[->, dashed] (Lib.west) -- (Linker.east);
+
+\end{tikzpicture}

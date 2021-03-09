@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- <!DOCTYPE IntelParallelAdvisorSummaryCollection SYSTEM  "IntelParallelAdvisorSummaryCollection.dtd"> -->
+
+<IntelParallelAdvisorSummary version="" 
+                             kind="DATAKIND_SURVEY_EX" >
+  <hotspot filename="/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c"
+           line_no="45"
+           routine="main"
+           is_vectorized="0"
+           self_time="3.418646E-01"
+           total_time="5.428735E+01"
+           trip_counts="13"
+           func_instance="9"
+           priority="0"/>
+  <hotspot filename="/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c"
+           line_no="46"
+           routine="main"
+           is_vectorized="1"
+           self_time="5.394548E+01"
+           total_time="5.394548E+01"
+           trip_counts=""
+           func_instance="46"
+           priority="0"/>
+  <hotspot filename="/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c"
+           line_no="36"
+           routine="main"
+           is_vectorized="0"
+           self_time="7.240009E-01"
+           total_time="2.037795E+02"
+           trip_counts="2"
+           func_instance="6"
+           priority="0"/>
+  <hotspot filename="/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c"
+           line_no="38"
+           routine="main"
+           is_vectorized="1"
+           self_time="2.030555E+02"
+           total_time="2.030555E+02"
+           trip_counts="8; 1"
+           func_instance="45"
+           priority="0"/>
+  <hotspot filename="/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c"
+           line_no="32"
+           routine="main"
+           is_vectorized="0"
+           self_time="3.201750E-02"
+           total_time="2.064621E+01"
+           trip_counts=""
+           func_instance="2"
+           priority="0"/>
+</IntelParallelAdvisorSummary >

@@ -1,0 +1,27 @@
+\begin{tikzpicture}[node distance=8mm,
+dots/.style={
+  font=\sffamily,
+  xshift=5mm,
+  minimum width=1cm
+},
+node/.append style = {xshift=5mm},
+memory/.append style = {yshift=-.25cm},
+]
+\tikzstyle{sample} = [-,thin]
+\tikzstyle{mem} = [-,thick]
+  \node (node0)  [node]                   {$P_0$};
+  \node (node1)  [node,right of=node0 ]   {$P_1$};
+  \node (dots)   [dots,right of=node1 ]   {$\ldots$};
+  \node (nodeN)  [node,right of=dots ]    {$P_N$};
+  \node (switch) [switch,below of=node1, xshift=6mm, yshift=-.35cm]   {interconnect};
+
+  \node (memory)   [memory,below of=switch]                {memory};
+
+\path[sample] (node0.south) edge[out=-60,in=120,looseness=0.8] (switch.north);
+\path[sample] (node1.south) edge[out=-60,in=120] (switch.north);
+\path[sample] (nodeN.south) edge[out=-120,in=120,looseness=0.8] (switch.north);
+
+\path[mem] (memory.north) edge (switch.south);
+
+
+\end{tikzpicture}

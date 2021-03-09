@@ -1,0 +1,84 @@
+% Slide 104
+\begin{tikzpicture}[scale = 0.9]
+\begin{scope}
+
+\node[anchor = east] at (0,0) {Master thread};
+\draw (0,0) -- (9.6, 0);
+\draw[line width = 3pt, blue6, opacity = 0.4] (0,0) -- (9.6, 0);
+
+\node[anchor = south] at (2.2, 0.6) {Task 1};
+\draw[thick, fill = white] (1, -0.6) rectangle (3.4, 0.6);
+\draw (1, -0.4) -- (3.4, -0.4);
+\draw (1, 0.4) -- (3.4, 0.4);
+\draw (1.8, 0.4) -- (1.8, -0.4);
+\draw (2.6, 0.4) -- (2.6, -0.4);
+
+\node at (1.4, 0) {A};
+\node at (2.2, 0) {B};
+\node at (3, 0) {C};
+
+\node[anchor = south] at (5.2, 0.6) {Task 2};
+\draw[thick, fill = white] (4, -0.6) rectangle (6.4, 0.6);
+\draw (4, -0.4) -- (6.4, -0.4);
+\draw (4, 0.4) -- (6.4, 0.4);
+\draw (4.6, 0.4) -- (4.6, -0.4);
+\draw (5.0, 0.4) -- (5.0, -0.4);
+\draw (5.9, 0.4) -- (5.9, -0.4);
+
+\node at (4.3, 0) {A};
+\node at (4.8, 0) {B};
+\node at (5.45, 0) {C};
+\node at (6.15, 0) {D};
+
+\node[anchor = south] at (8.2, 0.6) {Task 3};
+\draw[thick, fill = white] (7, -0.6) rectangle (9.4, 0.6);
+\draw (7, -0.4) -- (9.4, -0.4);
+\draw (7, 0.4) -- (9.4, 0.4);
+
+\draw (8.2, -0.4) -- (8.2, 0.4);
+\node at (7.6, 0) {A};
+\node at (8.8, 0) {B};
+\end{scope}
+
+\begin{scope}[yshift = -3cm]
+
+\node[anchor = east] at (0,0) {Master thread};
+\draw (0,0) -- (9.6, 0);
+
+\node[anchor = south] at (1.7, 1.5) {\scriptsize Parallel Task 1};
+\draw[thick, fill = white] (1, -1.5) rectangle (2.4, 1.5);
+
+\node[anchor = south] at (3.9, 1.5) {\scriptsize Parallel Task 2};
+\draw[thick, fill = white] (3.2, -1.5) rectangle (4.6, 1.5);
+
+\node[anchor = south] at (6.3, 1.5) {\scriptsize Parallel Task 3};
+\draw[thick, fill = white] (5.4, -1.5) rectangle (7.2, 1.5);
+
+\node[draw, rectangle, minimum width = 0.8cm, minimum height = 0.8cm] (A1) at (1.7, 0.9) {A};
+\node[draw, rectangle, minimum width = 0.8cm, minimum height = 0.8cm] (B1) at (1.7, 0.0) {B};
+\node[draw, rectangle, minimum width = 0.8cm, minimum height = 0.8cm] (C1) at (1.7, -0.9) {C};
+\node[draw, rectangle, minimum width = 0.6cm, minimum height = 0.5cm] (A2) at (3.75, 1) {A};
+\node[draw, rectangle, minimum width = 0.4cm, minimum height = 0.5cm] (B2) at (3.7, 0.35) {B};
+\node[draw, rectangle, minimum width = 0.9cm, minimum height = 0.5cm] (C2) at (3.9, -0.35) {C};
+\node[draw, rectangle, minimum width = 0.5cm, minimum height = 0.5cm] (D2) at (3.725, -1) {D};
+\node[draw, rectangle, minimum width = 1.2cm, minimum height = 0.8cm] (A3) at (6.3, 0.75) {A};
+\node[draw, rectangle, minimum width = 1.2cm, minimum height = 0.8cm] (B3) at (6.3, -0.75) {B};
+
+\draw[line width = 3pt, blue6, opacity = 0.4] (0,0) -- (1, 0) -- (A1.west) (A1.east) -- (2.4,0) -- (3.2, 0) -- (A2.west) (A2.east) -- (4.4, 1) -- (4.6, 0) -- (5.4, 0) -- (A3.west) (A3.east) -- (7.2, 0) -- (9.6, 0);
+
+\draw[dashed] (1, 0) -- (A1.west) (A1.east) -- (2.4, 0);
+\draw[dashed] (1, 0) -- (B1.west) (B1.east) -- (2.4, 0);
+\draw[dashed] (1, 0) -- (C1.west) (C1.east) -- (2.4, 0);
+
+\draw[dashed] (3.2, 0) -- (A2.west) (A2.east) -- (4.4, 1) -- (4.6, 0);
+\draw[dashed] (3.2, 0) -- (B2.west) (B2.east) -- (4.4, 0.35) -- (4.6, 0);
+\draw[dashed] (3.2, 0) -- (C2.west) (C2.east) -- (4.4, -0.35) -- (4.6, 0);
+\draw[dashed] (3.2, 0) -- (D2.west) (D2.east) -- (4.4, -1) -- (4.6, 0);
+
+\draw[dashed] (5.4, 0) -- (A3.west) (A3.east) -- (7.2, 0);
+\draw[dashed] (5.4, 0) -- (B3.west) (B3.east) -- (7.2, 0);
+
+\end{scope}
+
+\end{tikzpicture}
+

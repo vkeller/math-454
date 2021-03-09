@@ -1,0 +1,19 @@
+This code is composed of multiple files:
+
+- poisson.cc
+  contains the main function and the size of the problem
+
+- simulation.cc
+  contains the poisson solver
+  "compute_step" does the update of the grid for one step
+  "compute" does the loop with step computation and the swaping of the grids
+
+- grid.cc
+  contains a simple 2d grid stored in a 1d array
+
+- dumpers.cc
+  contains 2 implementations of a dumper, one generates ascii files
+  (pgm) the other one writes binary files (bmp)
+
+- double_buffer.cc
+  contains a simple tool to swap two grids

@@ -1,0 +1,8 @@
+-r
+/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/DGEMV/e000/trc000
+--return-app-exitcode
+--cs-mode=no-count-loops,no-count-flops,stack-stitching
+--count-flops
+--cs-file=/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/DGEMV/e000/callstacks.def
+--
+/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv

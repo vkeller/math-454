@@ -1,0 +1,16 @@
+# hash file version: 1
+11	2	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3144	3164	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	32	20	a6e797f658bb6b2b503f0cf9c05ee269	0	1	0
+12	4	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3052	4169	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	23	1148	a6e797f658bb6b2b503f0cf9c05ee269	0	1	0
+13	5	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3325	3361	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	38	36	a6e797f658bb6b2b503f0cf9c05ee269	1	4	0
+14	6	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3212	3473	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	36	277	a6e797f658bb6b2b503f0cf9c05ee269	0	1	0
+15	7	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	4102	4119	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	61	17	a6e797f658bb6b2b503f0cf9c05ee269	0	1	0
+16	8	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3664	3736	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	46	72	a6e797f658bb6b2b503f0cf9c05ee269	1	2	0
+17	9	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3548	3960	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	45	427	a6e797f658bb6b2b503f0cf9c05ee269	0	1	0
+18	10	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3449	3461	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	38	12	a6e797f658bb6b2b503f0cf9c05ee269	0	1	0
+19	11	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3619	3644	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	46	25	a6e797f658bb6b2b503f0cf9c05ee269	0	1	0
+20	12	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3915	3939	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	46	24	a6e797f658bb6b2b503f0cf9c05ee269	0	1	0
+21	13	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3842	3867	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	46	25	a6e797f658bb6b2b503f0cf9c05ee269	1	1	0
+22	14	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3412	3427	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	38	15	a6e797f658bb6b2b503f0cf9c05ee269	1	1	0
+23	15	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3310	3322	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	38	12	a6e797f658bb6b2b503f0cf9c05ee269	0	1	0
+24	45	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3310	3322,3361,3427,3461	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	38	75	a6e797f658bb6b2b503f0cf9c05ee269	1	1	0
+25	46	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv	3619	3644,3736,3867,3939	/home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv_serial.c	46	146	a6e797f658bb6b2b503f0cf9c05ee269	1	1	0

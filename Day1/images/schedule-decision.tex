@@ -1,0 +1,16 @@
+% Slide 97
+\begin{tikzpicture}[scale=0.8]
+
+\node (Start) at (0, 4) {Start};
+\node[decision] (Schedule) at (0, 2) {\texttt{schedule} \\ clause present?};
+\node[anchor = west] (DefSched) at (4, 2) {Use \textit{def-sched-var} schedule kind};
+\node[decision, inner sep = 2pt] (Runtime) at (0, -1.5) {schedule kind \\ value is \texttt{runtime}?};
+\node[anchor = west, align = left] (SchedKind) at (4, -1.5) {Use schedule kind specified\\ in \texttt{schedule} clause};
+\node[anchor = west, align = left] (RunSched) at (4, -4) {Use \textit{run-sched-var} schedule kind};
+
+\draw[->] (Start) -- (Schedule);
+\draw[->] (Schedule) -- node[near start, above] {No} (DefSched);
+\draw[->] (Schedule) -- node[midway, right] {Yes} (Runtime);
+\draw[->] (Runtime) |- node[pos = 0.83, above] {Yes} (RunSched);
+\draw[->] (Runtime) -- node[near start, above] {No} (SchedKind);
+\end{tikzpicture}

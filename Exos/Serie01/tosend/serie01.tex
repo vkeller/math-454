@@ -1,0 +1,342 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{a4wide}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{pcptex}
+\usepackage{xspace}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},   
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C
+}
+
+\begin{document}
+
+\enoncetitle{1}
+
+\noindent
+This serie can be made only with a sheet of paper and a pen. The objective is to exercise the theoretical analysis of a code and understand if it is worth or not to parallelize the sequential code and what could be its theoretical parallel performance.  
+\\
+
+The answer of the first five exercices are to be found in the five proposed videos.
+
+\begin{exercise}[Big O notation]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+	\item Define in one sentence the time and space complexities for an algorithm.
+
+	\item Assume you have two algorithms $A_1$ (with time complexity $\mathcal{O}_t(n~log~n)$ and space complexity $\mathcal{O}_s(n)$) and $A_2$ (with time complexity $\mathcal{O}_t(n^3)$ and space complexity $\mathcal{O}_s(n^3)$). Which one is worth to be parallelized ?
+
+\end{enumerate}
+\end{exercise}
+
+
+
+\begin{exercise}[Vocabulary]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+	\item Why a DAG (Direct Acyclic Graph) is useful for a theoretical analysis of a parallelisation strategy for a particular algorithm ?
+
+	\item What is the critical path in a DAG of tasks with their dependencies ?
+
+	\item What are the two main kind of parallelism  ?
+
+	\item What is one of the main solutions to solve the problem of ``irregular parallelism'' ?
+
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Machine model]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+	\item What ILP, TLP and DLP stands for ?
+
+	\item What is a vector intrinsic ?
+
+	\item Classify the memories according to their speed of access : DRAM, L2,L1,L3,SSD ?
+
+	\item Give the 4 types of parallel architectures according to Flynn's taxonomy and an example of each.
+
+\end{enumerate}
+\end{exercise}
+
+
+\begin{exercise}[Threads, processes and the OS]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+	\item What are the main differences between a thread and a process ?
+
+\end{enumerate}
+\end{exercise}
+
+
+
+\begin{exercise}[Performance aspects]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+	\item What is the definition of the speedup ?
+
+	\item What is the definition of the parallel efficiency ?
+
+	\item What is the definition of the Amdahl's law (with the serial part $f$ and the serial execution time $T_1$) and what does this law measures ?
+
+	\item What is the definition of the Gustafsson's law (with the non-parallelizable part $\alpha$ and the portion of parallelized part $P$) and what does this law measures ?
+\end{enumerate}
+\end{exercise}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We work on a Poisson equation solver in 2D. Here follows the Poisson problem :
+\\
+
+The Poisson's equation is:
+
+\begin{equation}
+\nabla^2 \varphi = f
+\end{equation}
+
+that is in 2D
+
+\begin{equation}
+\left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} \right) \varphi(x,y) = f(x,y)\label{pde}
+\end{equation}
+
+with $\partial \Omega = 0$
+
+The equation is discretized on a 2D rectangular domain of size $NxN$. We use centered finite differences to approximate (\ref{pde}). This will lead to a linear system $Ax = b$. Using a Jacobi iterative method to solve it and expressing $\varphi^{k+1}$ as a function of $\varphi^k$ , we obtain
+
+\begin{equation}
+\varphi_{i,j}^{k+1} = \frac{1}{4} \left( \varphi_{i+1,j}^{k} + \varphi_{i-1,j}^{k} + \varphi_{i,j+1}^{k} + \varphi_{i,j-1}^{k} -f_{i,j} h^2 \right)
+\end{equation}
+
+where $h = \frac{1}{N}$
+
+For our preliminary results, we set $f_{i,j} = -2 \pi^2 sin(\pi i h) * sin (\pi j h) $
+\\
+
+Here follows a bulk of a sequential code to solve the 2D poisson equation using Jacobi's method. We set \texttt{eps = .005} the minimal error that the l2-norm must reach. 
+
+\begin{lstlisting}[style=CStyle]
+int main() {
+  int     i, j, k;
+  float **u, **uo, **f;
+  float   h, l2;
+
+  h = 1. / (double)N;
+
+  // Allocation of the arrays of pointers
+  malloc ...
+
+  // initialization of u0 and f
+  for(i = 0; i < N; ...
+
+  k=0;
+  start = second();
+  do {
+    l2 = 0.;
+    for(i = 1; i < N-1; i++) {
+      for(j = 1; j < N-1 ;j++) {
+        // computation of the new step
+        u[i][j] = 0.25 * ( uo[i-1][j] + uo[i+1][j] + uo[i][j-1] + uo[i][j+1] - f[i][j]*h*h);
+
+        // L2 norm
+        l2 += (uo[i][j] - u[i][j])*(uo[i][j] - u[i][j]);
+      }
+    }
+
+    // copy new grid in old grid
+    for(i = 0; i < N; i++){
+      for(j = 0; j < N; j++){
+        uo[i][j] = u[i][j];
+      }
+    }
+
+    k++;
+  } while(l2 > eps);
+  end = second();
+
+  double t = end - start;
+  printf("T=%.5f s for %d steps (%.5f s/step)\n", (end - start), k, (end - start)/k);
+
+
+  // deallocation of the rows
+  free ...
+
+  return 0;
+}
+
+\end{lstlisting}
+
+
+
+% ------------------------------------------------------------------------
+
+
+\begin{exercise}[Computational complexities]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+
+	\item compute the computational complexity (``big O'' notation) of the algorithm (in {\bf time})
+
+
+	\item compute the computational complexity (``big O'' notation) of the algorithm (in {\bf space})
+
+
+	\item is this problem worth to be parallelized ?
+
+\end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}[Theoretical analysis : Amdhal's law]
+  $~$ % ugly trick to get a newline
+\\
+
+We assume a very simple parallelization strategy : each processor $p$ gets $\frac{N}{size}$ number of lines of the grid. Where $size$ is the total number of processor. We consider $sd_{p}$ the subdomain of size $N \times \frac{N}{size}$ belonging to processor $p$. 
+\\
+
+At each time step the algorithm is :
+
+\begin{enumerate}
+
+	\item compute a step of the Jacobi solution on $sd_{p}$
+
+	\item send the last line of $sd_{p}$ to processor $p+1$ and the first line of $sd_{p}$ to processor $p-1$
+
+	\item receive the last line of $sd_{p-1}$ from processor $p-1$ and the first line of $sd_{p+1}$ from processor $p+1$
+
+	\item compute the local l2 norm
+
+	\item send the local l2 norm to processor 0.
+
+	\item  \begin{enumerate} \item{if $p == 0$ compute the global l2 norm by suming all the local l2 norms} \item{if $p==0$ send the global l2 norm to all processors} \end{enumerate}
+
+	\item receive the global l2 norm from process 0. 
+
+	\item Compare with espilon. Exit if reached. 
+
+\end{enumerate}
+
+Please answer the following questions :
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item give an estimation of $f$ (the sequential part of the code that can not be parallelized). 
+
+	\item What is the upper bound of the speed up in the case of Amdahl's law ? 
+
+\end{enumerate}
+  
+
+\end{exercise}
+
+
+
+\begin{exercise}[Theoretical analysis : Gustafsson's law]
+$~$ % ugly trick to get a newline
+
+We assume the same parallelization strategy as above.
+
+\begin{enumerate}[label=(\alph*)]
+	\item What would be the maximum efficiency of this parallel 2D poisson solver at 128 processors ?
+
+\end{enumerate}
+  
+
+\end{exercise}
+
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{ | l | l | l | l |} 
+\hline 
+\textbf{N} & \textbf{$t_{exec}$} in [s] & \textbf{$n_{steps}$} & \textbf{$t_{step}$} in [s/step] \\ 
+\hline 
+ 128 & 0.00327 & 109 & 0.00003 \\ 
+\hline 
+ 256 & 0.49690 & 8194 & 0.00006 \\ 
+\hline 
+ 384 & 1.08357 & 7445 & 0.00015 \\ 
+\hline 
+ 512 & 2.24262 & 8238 & 0.00027 \\ 
+\hline 
+ 640 & 4.21539 & 8234 & 0.00051 \\ 
+\hline 
+ 768 & 5.50039 & 6088 & 0.00090 \\ 
+\hline 
+ 896 & 7.73676 & 5655 & 0.00137 \\ 
+\hline 
+ 1024 & 15.24620 & 7395 & 0.00206 \\ 
+\hline 
+ 1152 & 23.31712 & 7450 & 0.00313 \\ 
+\hline 
+ 1280 & 34.05131 & 7724 & 0.00441 \\ 
+\hline 
+ 1408 & 40.63664 & 8371 & 0.00485 \\ 
+\hline 
+ 1536 & 75.72088 & 13049 & 0.00580 \\ 
+\hline 
+ 1664 & 87.59173 & 13222 & 0.00662 \\ 
+\hline 
+ 1792 & 85.20292 & 13255 & 0.00643 \\ 
+\hline 
+ 1920 & 107.04605 & 13652 & 0.00784 \\ 
+\hline 
+ 2048 & 126.07080 & 13964 & 0.00903 \\ 
+\hline 
+ 2176 & 132.90533 & 13521 & 0.00983 \\ 
+\hline 
+ 2304 & 236.20318 & 18680 & 0.01264 \\ 
+\hline 
+ 2432 & 246.09119 & 18814 & 0.01308 \\ 
+\hline 
+ 2560 & 258.23294 & 17515 & 0.01474 \\ 
+\hline 
+\end{tabular}
+%\captionof{table}{Measurements of a 2D poisson solver. N is the size of the problem (grid size = $N \times N$), Execution time is in seconds. Third column is the number of iterations steps to reach an espilon of $0.005$. Last column shows the time per iteration}
+\caption{Measurements of a 2D poisson solver. N is the size of the problem (grid size = $N \times N$), Execution time is in seconds. Third column is the number of iterations steps to reach an espilon of $0.005$. Last column shows the time per iteration}
+\label{tab1}
+\end{table}
+
+
+% ------------------------------------------------------------------------
+
+\end{document}
+

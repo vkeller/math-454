@@ -1,0 +1,18 @@
+% Slide 208
+\begin{tikzpicture}[xscale = 0.7]
+
+\draw[step = 0.5cm] (0,0) grid (12, 0.5);
+
+\foreach \x[count = \i from 0] in {1, 4, ..., 10} {
+	\node[circle, draw, inner sep = 5pt] (\i) at (\x, 4) {\i};
+	\draw[->] (\i) -- (\x, 0.5);
+}
+
+\node[anchor = west] at (12.5, 4) {MPI Processes};
+\node[anchor = west] at (12.5, 2) {Interconnect};
+\node[anchor = west] at (12.5, 0.25) {File};
+
+\draw[dotted, rounded corners = 5pt] (0,1.75) rectangle (12, 2.25);
+
+
+\end{tikzpicture}

@@ -1,0 +1,18 @@
+% Slide 210
+\begin{tikzpicture}[xscale = 0.8]
+
+
+\foreach \x/\c[count = \i from 0] in {0/blue8, 3/blue4, 6/yellowbrown4, 9/yellowbrown2} {
+	\node[outer sep = 3pt, fill = \c!40!white, circle, draw, inner sep = 5pt] (\i) at (\x, 4) {\i};
+	\fill[\c!40!white] (\x, 0) rectangle (\x + 3, 0.5);
+}
+
+\draw[step = 0.5cm] (0,0) grid (12, 0.5);
+
+\draw[->] (1) to[bend left] (0);
+\draw[->] (2) to[bend left] (0);
+\draw[->] (3) to[bend left] node[pos = 0.3, right, xshift = 0.5cm] {\texttt{MPI\_send(mypart, 0)}} (0);
+
+\draw[->] (0.north east) to[out = 70, in = 110, looseness = 2] (0.north west);
+\draw[->] (0) to[bend right] node[midway, right] {\texttt{Write()}} (-0.05, 0.55);
+\end{tikzpicture}

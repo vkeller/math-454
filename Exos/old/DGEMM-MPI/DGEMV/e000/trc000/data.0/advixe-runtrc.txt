@@ -1,0 +1,8 @@
+
+=== Start: [2018/11/15 11:33:05] === 
+Analysis started...
+Result file: /home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/DGEMV/e000/trc000/trc000.advixe 
+Application exit code: 0 
+Result file: /home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/DGEMV/e000/trc000/trc000.advixe 
+Analysis completed
+=== End: [2018/11/15 11:40:17] === 

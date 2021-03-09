@@ -1,0 +1,22 @@
+====== Add 2 numbers =====
+1. At the command prompt (in SCC) type (tocreate ptx file for matlab):
+	nvcc -ptx add.cu
+
+2. To specify the entry point for MATLAB kernel, run(at matlab prompt):
+	k = parallel.gpu.CUDAKernel('add.ptx', 'addnums.cu');
+
+3. Run kernel (kernel takes 2 arguments):
+	out = feval(k, 7, 21);
+
+====== Add 2 vectors =====
+1. At the command prompt (in SCC) type (tocreate ptx file for matlab):
+	nvcc -ptx add.cu
+
+2. To specify the entry point for MATLAB kernel, run(at matlab prompt):
+	k = parallel.gpu.CUDAKernel('add.ptx', 'addvecs.cu');
+
+3. Run kernel:
+	N = 128;
+	k.ThreadBlockSize = N;
+	feval(k, ones(N, 1), ones(N, 1));
+

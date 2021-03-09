@@ -1,0 +1,79 @@
+TODO List MATH-454
+==================
+
+Ajouter Moodle : 
+- 2h course
+- 2h exercices
+
+tous les exercices rendus pour feedback sans deadline. Sauf ceux qui sont rendus pour note.
+
+
+
+
+
+- 100% Discord
+
+- Mise à jour d Moodle (Vince + double-check Nico)
+
+- Pédagogie inversée
+	- chaque support est self contained (vidéo)
+	- l'exercice doit porter sur le sujet de la vidéo
+
+EXERCICES
+=========
+
+- 10 semaines cours + exos
+	- chaque semaine les étudiants doivent rendre quelque chose. Ceci est corrigé par les assistants/professeurs : travail formatif (TF)
+	- deux travaux significatifs (TS) sur les 10 semaines
+		- code MPI donné : étude théorique + mesures
+		- code CUDA donné : étude théorique + mesures
+
+
+- 4 semaines pour le projet. On demande :
+	- Amdhal
+	- Gustafsson
+	- Speedup (MPI) ou Efficiency (CUDA) sur 2 noeuds / 1 GPU
+	- Profiling (TODO : à trouver une valeur à demander aux étudiants)
+
+NOTE FINALE:
+===========
+
+Chaque TS vaut 1/3, le projet vaut 1/3. Note finale est la moyenne des trois. 
+
+
+COURS
+=====
+
+Semaine 1 (bases + théorie):
+	- corriger les exercices (Vince)
+	- trouver bonne vidéo (Vince)
+
+Semaine 2 (Git + ...):
+	- trouver questions à formuler pour GIT (Nico)
+
+Semaine 3 (latency, througput, roofline, etc..):
+	- mettre en forme exercices (Vince)
+	- trouver bonne vidéo (Vince)
+
+Semaine 4 - 7 (OpenMP + MPI):
+	- vérifier les exercices (Nico)
+	- trouver bonne vidéo (Vince)
+
+Semaine 8 - 9 (CUDA):
+	- demander à Varini s'il veut donner le cours  (Nico)
+	- sinon : trouver vidéo + exercices (Vince)
+
+Semaine 10 (parallel profiling)
+	- refaire l'exercice poisson sur GPU (Vince)
+
+
+DIVERS
+======
+
+- Réservation FIDIS (Nico)
+- Refaire repo GIT vide (Nico)
+
+
+Sinon : (????)
+
+https://www.mooc-list.com/course/parallel-programming-coursera

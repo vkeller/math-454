@@ -1,0 +1,35 @@
+
+This directory contains a set of examples/excersizes for
+RCS Tutorial "Introduction to  GPU Programming"
+
+Directory Structure
+-------------------
+
+   deviceQuery - a simple C program to query GPU devices available
+   helloCuda   - an example of CUDA code that outputs a message from each CUDA thread
+   vectorAdd   - a simple example of CUDA kernel to add 2 vectors
+   gemm        - directory containning GEMM (from BLAS library) 
+                 algorithm implemented in C, CUDA and OpenACC
+   gpu_matlab  - a directory containing matlab examples that use GPUs
+
+Usage notes
+-----------
+   
+   Each directory contains Readme file with detailed instructions.
+   Load module cuda/5.0 to link and run cuda code
+
+Contact Information
+-------------------
+   Katia Oleinik
+   koleinik@bu.edu
+
+Operating System Requirements
+-----------------------------
+   The examples presented in this directory were written for Linux OS, but should
+   work on any OS where c and nvcc compilers available
+   NVIDIA's GPU(s) with compute capability 2.0 and higher 
+   Matlab version 2012a and higher
+   
+Updates
+-------
+   2013-06-01: The first version of Intro to GPU programming tutorial created

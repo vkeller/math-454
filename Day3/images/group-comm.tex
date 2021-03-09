@@ -1,0 +1,46 @@
+% Slide 194
+\begin{tikzpicture}[scale=0.7, every node/.style={scale=0.8}]
+\node[label = {above:\texttt{MPI\_COMM\_WORLD}}, ellipse, draw, minimum height = 3cm, minimum width = 6cm, dashed, outer sep = 3pt] (W) at (0,0) {};
+
+\node[circle, draw, inner sep = 3pt] at (-2, 0) {2};
+\node[circle, draw, inner sep = 3pt] at (-1.3, -0.3) {1};
+\node[circle, draw, inner sep = 3pt] at (-1, 0.4) {6};
+\node[circle, draw, inner sep = 3pt] at (-0.2, 0) {0};
+\node[circle, draw, inner sep = 3pt] at (0.4, 0.5) {7};
+\node[circle, draw, inner sep = 3pt] at (0.6, -0.5) {3};
+\node[circle, draw, inner sep = 3pt] at (1.3, 0) {5};
+\node[circle, draw, inner sep = 3pt] at (2.3, 0) {4};
+
+\node[ellipse, label = {left:{Group 1}}, minimum height = 2cm, minimum width = 3cm] (G1) at (-3, -3) {};
+\node[circle, draw, inner sep = 3pt] at (-3.4, -2.6) {1};
+\node[circle, draw, inner sep = 3pt] at (-2.6, -2.6) {3};
+\node[circle, draw, inner sep = 3pt] at (-3.8, -3.3) {2};
+\node[circle, draw, inner sep = 3pt] at (-3, -3.3) {0};
+\node[circle, draw, inner sep = 3pt] at (-2.2, -3.3) {4};
+
+\node[ellipse, label = {right:{Group 2}}, minimum height = 2cm, minimum width = 1.5cm] (G2) at (3, -3) {};
+\node[circle, draw, inner sep = 3pt] at (3.2, -3.4) {7};
+\node[circle, draw, inner sep = 3pt] at (3.2, -2.6) {6};
+\node[circle, draw, inner sep = 3pt] at (2.5, -3) {5};
+
+\draw[->] (W) -- (G1);
+\draw[->] (W) -- (G2);
+
+\begin{scope}[yshift = -2.6cm]
+\node[draw, blue2, outer sep = 3pt, dashed, ellipse, label = {below:{MPI Communicator (Group1)}}, minimum height = 2cm, minimum width = 3cm] (GC1) at (-3, -3) {};
+\node[circle, draw, inner sep = 3pt] at (-3.4, -2.6) {1};
+\node[circle, draw, inner sep = 3pt] at (-2.6, -2.6) {3};
+\node[circle, draw, inner sep = 3pt] at (-3.8, -3.3) {2};
+\node[circle, draw, inner sep = 3pt] at (-3, -3.3) {0};
+\node[circle, draw, inner sep = 3pt] at (-2.2, -3.3) {4};
+
+\node[draw, blue2, outer sep = 3pt, dashed, ellipse, label = {below:{MPI Communicator (Group2)}}, minimum height = 2cm, minimum width = 3cm] (GC2) at (3, -3) {};
+\node[circle, draw, inner sep = 3pt] at (3.2, -3.4) {7};
+\node[circle, draw, inner sep = 3pt] at (3.2, -2.6) {6};
+\node[circle, draw, inner sep = 3pt] at (2.5, -3) {5};
+\end{scope}
+
+\draw[->] (G1) -- (GC1);
+\draw[->] (G2) -- (GC2);
+
+\end{tikzpicture}

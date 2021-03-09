@@ -1,0 +1,206 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{a4wide}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{pcptex}
+\usepackage{xspace}
+
+\begin{document}
+
+\enoncetitle{4}
+
+\noindent
+This week you will go for your first parallel implementation. The objective of this serie is to go through the {\it Profiling-Optimization Cycle} presented during Week 4 by Nicola Varini. The steps are detailed here
+
+\begin{itemize}
+\item {debug a bad serial implementation of the 2D Poisson problem}
+\item {profile a correct serial implementation}
+\item {Measure the difference between {\tt icc}, {\tt gcc} and the main optimization flags on the performance of this correct serial implementation}
+\item {parallelize the 2D Poisson problem using OpenMP}
+\end{itemize}
+
+% ------------------------------------------------------------------------
+
+\begin{exercise}[Debugging]
+  $~$ % ugly trick to get a newline
+  \begin{itemize}
+  \item Update the pcpt-2015 repository.
+  \item There is a new folder \texttt{bugy-poisson}, enter the folder and type
+    \texttt{make}
+  \item This will compile a version of poisson where bugs have been added.
+    In order to do less loops the termination criteria has been changed to a
+    loop on 200 iterations.
+
+    In order to find the bugs you will use two sequential debugging tools,
+    \texttt{valgrind} and \texttt{gdb}
+
+    Notice that when you compile with the make command \texttt{-g} option is
+    added. This is to add the debugging symbols in the executable.
+
+    Try  to concentrate on the bug one after the other. They are fairly easy to
+    catch by reading the code, but the point of this exercise is to make you
+    practice the tools more than catching this particular bugs.
+  \item Run gdb
+    \begin{itemize}
+    \item \texttt{\$ gdb ./poisson-bug}
+    \item If you type \texttt{run} or \texttt{r} it will run the code up to the
+      failure point and indicate the line where it stopped
+    \item At this point you can print the content of the different variables
+      with the \texttt{print} command. (\texttt{print} or \texttt{p})
+
+      for example to print \texttt{i}: \texttt{p i}
+      or the 10 first values of \texttt{u}: \texttt{p u[0][0]@10}
+    \item If at this point you did not figure out the first bug add a breakpoint
+      before the loop at line 120 (\texttt{break 120} or \texttt{b 120}) or at
+      the beginning of the main \texttt{break main} or \texttt{b main}
+
+      Type \texttt{r} again to restart the code, this time the execution will
+      stop at the breakpoint
+    \item Now you can advance step by step with with the \texttt{next}
+      (\texttt{n}), and check the different values with \texttt{p}.
+
+    \item SPOILER: the first bug to find is in the loop bound, since we access
+      to $i-1$ and $j-1$ at line 124, $i$ and $j$ cannot start at 0.
+
+    \item Once this is corrected compile again and run again.
+      The second bug should show up.
+
+      Here it is not a segfault but an infinite loop. And we have an hint the
+      name of the image generated looks messed up after 127.
+
+      So lets set a breakpoint at line 121 to stop at first line in the
+      loop. But this time we will add a condition to the breakpoint. The command
+      for this is \texttt{b 121 if k==127}
+    \item Try to advance in the execution and check what happen to the variable
+      \texttt{k} when increased at the end of the loop
+
+    \item SPOILER: here the bug is a bound error. k is stored on a char of 8
+      bits so 256 values, but since it is signed it is from -126 to 127.
+      In this case either you really want a 8bit storage \texttt{unsigned char}
+      or go for a bigger space \texttt{short} or \texttt{int}
+
+    \item compile again and run again. Everything should run nicely, the results
+      even look correct. But there is still 2 bugs. In particular one that will
+      most probably not do anything as long as the problem is not big enough.
+    \end{itemize}
+
+  \item Run valgrind
+    \begin{itemize}
+    \item Run again the code with valgrind, It will complain right at the
+      beginning something like
+\begin{verbatim}
+==14705== Invalid write of size 4
+==14705==    at 0x400DE0: main (poisson-bug1.c:113)
+==14705==  Address 0x54e0d30 is 0 bytes after a block of size 1,024 alloc'd
+==14705==    at 0x4C28C20: malloc (vg_replace_malloc.c:296)
+==14705==    by 0x400D49: main (poisson-bug1.c:104)
+\end{verbatim}
+
+      This suggest that at line 113 there is a write access outside of an
+      allocated zone in memory. An extra information is that this is right after
+      an array allocated at line 104.
+
+    \item The other thing that valgrind tells us is at the end of the
+      execution. It gives a \texttt{LEAK SUMMARY}, and since there are leeks it
+      propose to rerun with the option \texttt{--leak-check=full}.
+
+      If you do so it will give you the line of at which data are allocated and
+      not freed.
+
+      In our case it is not harmful, but if similar leaks happen in loops it
+      would give a nasty bug that appears only on big cases. So even if your
+      code run fine and give good results it is always a good idea to check for
+      any leaks.
+    \end{itemize}
+  \end{itemize}
+\end{exercise}
+
+
+% ------------------------------------------------------------------------
+
+\begin{exercise}[Flat profiling]
+Once your code has been debugged and run without error, you are asked to profile it using gprof. Compile and link it with the {\tt -pg} flag
+
+\begin{verbatim}
+gcc -pg  poisson.c -o poisson
+\end{verbatim}
+
+then run it. The {\tt gprof} utility is used to analyze a special file produced by the execution ({\tt gmon.out}). It presents you the measured data in a flat profile view.
+
+\begin{verbatim}
+./poisson ; gprof ./poisson
+\end{verbatim}
+
+Where does your code spend most of the time ?
+
+\end{exercise}
+
+% ------------------------------------------------------------------------
+
+\begin{exercise}[{\tt icc}, {\tt gcc}, {\tt optimization}, {\tt vectorization} and other cool stuff]
+
+From now on, you compiled and linked your code without any optimization flag. Try to change the compiler ({\tt icc} or {\tt gcc}), the optimization level ({\tt -O1}, {\tt -O2}, {\tt -O3}) and the loop vectorizer ({\tt -ftree-vectorize} for {\tt gcc}, {\tt -xHost} for {\tt icc}) and complete the following array with the execution time in seconds. To do that : {\bf remove the call to {\tt write\_to\_file()} and increase the size to {\tt N = 1024} } in order to measure representative timings (several seconds)
+
+\begin{center}
+  \begin{tabular}{|l||l|l|}
+    \hline
+    optimization level & icc & gcc \\ \hline \hline
+    {\tt -O0} &  &  \\ \hline
+    {\tt -O1} &  &  \\ \hline
+    {\tt -O2} &  &  \\ \hline
+    {\tt -O3} &  &  \\ \hline
+    {\tt -O3 -xHost} &  &  \\
+    \hline
+  \end{tabular}
+\end{center}
+
+A simple way to measure the execution time is using {\tt second()} :
+
+\begin{verbatim}
+#include <sys/time.h>
+#include <time.h>
+double second(){
+        struct timeval tp;
+        int i;
+        i = gettimeofday(&tp,NULL);
+        return ( (double) tp.tv_sec + (double) tp.tv_usec * 1.e-6 );
+}
+\end{verbatim}
+
+example :
+
+\begin{verbatim}
+double t = second()
+ ... do some work here
+printf("Execution time = %f [s] \n",(second()-t));
+\end{verbatim}
+
+\end{exercise}
+
+
+% ------------------------------------------------------------------------
+
+
+\begin{exercise}[Parallelization with OpenMP]
+Take the best combination [compiler,optimization flags] and parallelize the loops with OpenMP directives. To compile your OpenMP version, you need to add the flag {\tt -fopenmp} if you choose {\tt gcc}, {\tt -openmp} if you choose {\tt icc} at compilation and link phases. Vary the number of OpenMP threads, measure the speedup. Report the execution timings with respect to the number of threads of your parallelized version. The numerical results of your parallel version must be the same than the one of your serial version !! A simple verification can be done here with a comparison of the number of steps to reach {\tt (l2 $\leq$ eps)}.
+
+\begin{center}
+   \begin{tabular}{|l|l|l|}
+     \hline
+     {\tt OMP\_NUM\_THREADS} & time [s] & speedup \\ \hline \hline
+      1 & & 1 \\ \hline
+      2 & &  \\ \hline
+      4 & &  \\ \hline
+      8 & &  \\ \hline
+      16 & &  \\ \hline
+      32 & &  \\ \hline
+     \hline
+   \end{tabular}
+ \end{center}
+(facultative) Report the speedup in a log-log graph using R
+\end{exercise}
+
+
+
+
+\end{document}

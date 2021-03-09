@@ -1,0 +1,26 @@
+#!/bin/csh
+#
+# Batch submission procedure:
+# katana% qsub mybatch
+#
+# Note: A line of the form "#$ qsub_option" is interpreted
+#       by qsub as if "qsub_option" was passed to qsub on
+#       the commandline.
+#
+# Set the hard runtime (aka wallclock) limit for this job,
+# default is 2 hours. Format: -l h_rt=HH:MM:SS
+#
+#$ -l h_rt=2:00:00
+#
+# Merge stderr into the stdout file, to reduce clutter.
+#
+#$ -j y
+#
+# Specifies number of GPUs wanted
+#
+#$ -l gpus=1
+#
+# end of qsub options
+#
+matlab -nodisplay -singleCompThread -r "N=3000;gpuExample(rand(N),rand(N));exit"
+# end of script

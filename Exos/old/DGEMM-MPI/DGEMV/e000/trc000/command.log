@@ -1,0 +1,1 @@
+/opt/intel/advisor_2018.2.0.551025/bin64/advixe-cl -collect tripcounts -module-filter-mode=exclude -trip-counts -flop -no-stacks -no-callstack-tripcounts -no-flops-and-masks -no-callstack-flops -stack-stitching -no-profile-python -auto-finalize -project-dir /home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/DGEMV -- /home/vkeller/ownCloud/SCITAS/PHPC-2018/Exos/DGEMM-MPI/dgemv

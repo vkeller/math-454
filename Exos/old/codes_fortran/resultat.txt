@@ -1,0 +1,26 @@
+mpirun -np 2
+
+ iteration           0  0.2406971    
+ iteration           1  0.2405848    
+ iteration           2  0.2404727    
+ iteration           3  0.2403599    
+ iteration           4  0.2402485    
+ iteration           5  0.2401279    
+ iteration           6  0.2400146    
+ iteration           7  0.2399049    
+ iteration           8  0.2397930    
+ iteration           9  0.2396814    
+ iteration          10  0.2395671 
+
+seq
+
+ iteration           0  0.2407195    
+ iteration           1  0.2406060    
+ iteration           2  0.2404946    
+ iteration           3  0.2403800    
+ iteration           4  0.2402636    
+ iteration           5  0.2401505    
+ iteration           6  0.2400405    
+ iteration           7  0.2399263    
+ iteration           8  0.2398142    
+ iteration           9  0.2397014 

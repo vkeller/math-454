@@ -1,0 +1,292 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{a4wide}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{pcptex}
+\usepackage{xspace}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{caption}
+
+
+\definecolor{mGreen}{rgb}{0,0.6,0}
+\definecolor{mGray}{rgb}{0.5,0.5,0.5}
+\definecolor{mPurple}{rgb}{0.58,0,0.82}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},   
+    commentstyle=\color{mGreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{mGray},
+    stringstyle=\color{mPurple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=C
+}
+
+\begin{document}
+
+\corrigetitle{1}
+
+
+\begin{exercise}[Big O notation]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+	\item Define in one sentence the time and space complexities for an algorithm.
+
+{\it
+	\begin{itemize}
+		\item Time complexity : The impact of more data on the time it takes to complete the algorithm (total execution time)
+		\item Space complexity : The impact of more data on the memory requirements to complete the algorithm 
+	\end{itemize}
+
+}
+
+	\item Assume you have two algorithms $A_1$ (with time complexity $\mathcal{O}_t(n~log~n)$ and space complexity $\mathcal{O}_s(n)$) and $A_2$ (with time complexity $\mathcal{O}_t(n^3)$ and space complexity $\mathcal{O}_s(n^3)$). Which one is worth to be parallelized ?
+
+{\it
+	Algorithm $A_1$ is close to linear in terms of time and its memory requirements is linear. The second $A_2$ presents a cubic complexity in terms of time and memory requirements. Thus the second ($A_2$) is probably a better candidate. 
+}
+
+\end{enumerate}
+\end{exercise}
+
+
+
+\begin{exercise}[Vocabulary]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+	\item Why a DAG (Direct Acyclic Graph) is useful for a theoretical analysis of a parallelisation strategy for a particular algorithm ?
+
+{\it	A DAG contains all the tasks involved in the parallel algorithm. Once all dependencies (relations between tasks) have been defined, it is straightforward to point the independent tasks that can be executed in parallel.  
+}
+	\item What is the critical path in a DAG of tasks with their dependencies ?
+
+{\it
+	It is the longest execution time path through the tasks. 
+}
+
+	\item What are the two main kind of parallelism  ?
+
+{\it
+
+	\begin{itemize}
+		\item {Data parallelism : any kind of parallelism that grows with the data set size}
+		\item {Functional decomposition : assign tasks to distinct functions in the algorithm}
+	\end{itemize}
+}
+
+	\item What is one of the main solutions to solve the problem of ``irregular parallelism'' ?
+
+{\it
+	Introducing load balancing : all the tasks involved in the parallel computation should have the same amount of work to perform.  
+}
+\end{enumerate}
+\end{exercise}
+
+\begin{exercise}[Machine model]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+	\item What ILP, TLP and DLP stands for ?
+
+{\it
+	\begin{itemize}
+		\item {ILP : Instruction-level parallelism (how many instructions can be executed simultaneously on a CPU)}
+		\item {TLP : Thread-level (or Task-level) parallelism (how many tasks can be executed simultaneously on the same data)}
+		\item {DLP : Data-level parallelism (or vector parallelism : one instruction is executed on a vector of data in one clock cycle)}
+	\end{itemize}
+}
+
+	\item What is a vector intrinsic ?
+
+{\it
+	An instruction of the processor (CPU) that performed on a vector of data. For instance, the Intel intrinsic \texttt{\_mm\_fmadd\_pd(a,b,c)} performs a fused multiply-add ($a = a + (b \times c)$) on 128 bits long vectors (2 double precision floating points)
+}
+
+
+	\item Classify the memories according to their speed of access : DRAM, L2,L1,L3,SSD ?
+
+{\it
+	L1, L2, L3, DRAM, SSD
+}
+
+
+	\item Give the 4 types of parallel architectures according to Flynn's taxonomy and an example of each.
+
+{\it
+\begin{center}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+  & Single Data & Multiple Data \\ 
+\hline
+Single Instruction & SISD & SIMD \\
+\hline
+Multiple Instruction & MISD & MIMD \\
+\hline
+\end{tabular}
+\end{center}
+
+
+	\begin{itemize}
+		\item {SISD : one instruction in one core of a CPU }
+		\item {SIMD : vector registers (like Intel AVX))}
+		\item {MISD : very rare !!}
+		\item {MIMD : Distributed memory machines like clusters }
+	\end{itemize}
+
+
+}
+
+\end{enumerate}
+\end{exercise}
+
+
+
+
+\begin{exercise}[Threads, processes and the OS]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+	\item What are the main differences between a thread and a process ?
+
+{\it
+\begin{center}
+\begin{tabular}{ |c|c| } 
+ \hline
+Process & Thread \\ 
+\hline
+each process has its own memory space & Each thread uses the process' memory\\
+\hline
+heavyweight operations & leightweight operations\\
+\hline
+context switching is expensive & context switching is cheaper\\
+\hline
+No memory sharing between processes & Each thread uses the process' memory\\
+\hline
+\end{tabular}
+\end{center}
+}
+\end{enumerate}
+\end{exercise}
+
+
+
+\begin{exercise}[Performance aspects]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+	\item What is the definition of the speedup ?
+
+{\it
+	If $T_1$ is the (best) sequential execution time and $T_p$ the execution time on $p$ processes, then the speedup is defined by $S_p = \frac{T_1}{T_p}$
+}
+
+
+	\item What is the definition of the parallel efficiency ?
+
+{\it
+	If $T_1$ is the (best) sequential execution time and $T_p$ the execution time on $p$ processes, then the parallel efficiency is defined by $E = \frac{T_1}{p~T_p} = \frac{S_p}{p}$
+}
+
+	\item What is the definition of the Amdahl's law (with the serial part $f$ and the serial execution time $T_1$) and what does this law measures ?
+
+{\it
+	The Amdahl's law defines the maximum speedup as $S = \frac{T_1}{f~T_1 + (1-f)~\frac{T_1}{p}} = \frac{p}{(1 + (p-1) f)}$. It measures the maximum speedup a parallelized code can achieve by keeping the amount of work constant and by increasing the number of processes. This is called strong scaling.
+}
+
+
+	\item What is the definition of the Gustafsson's law (with the non-parallelizable part $\alpha$ and the portion of parallelized part $P$) and what does this law measures ?
+
+{\it
+	The Gustafsson's law defines the maximum speedup as $S(P) = P - \alpha (P-1)$. It measures the maximum speedup a parallelized code can achieve by keeping the amount of work constant PER PROCESS and by increasing the number of processes. This is called weak scaling.
+}
+
+\end{enumerate}
+\end{exercise}
+
+
+
+
+
+\begin{exercise}[Performance aspects on 2D Poisson solver]
+  $~$ % ugly trick to get a newline
+\begin{enumerate}[label=(\alph*)]
+
+	\item compute the computational complexity (``big O'' notation) of the algorithm (in {\bf time})
+
+{\it
+	The complexity in time is $\mathcal{O}(n^2)$. If the size of the grid is doubled, the number of iterations is 4 times bigger. 
+}
+
+	\item compute the computational complexity (``big O'' notation) of the algorithm (in {\bf space})
+
+{\it
+	The complexity in space is $\mathcal{O}(n^2)$. If the size of the grid is doubled, the memory requirements is 4 times bigger. 
+}
+
+
+	\item is this problem worth to be parallelized ?
+
+{\it
+	Due to the computational complexities in $\mathcal{O}(n^2)$, the 2D Poisson problem is worth to be parallelized. 
+}
+
+
+\end{enumerate}
+
+\end{exercise}
+
+
+\begin{exercise}[Theoretical analysis : Amdhal's law]
+
+  $~$ % ugly trick to get a newline
+
+\begin{enumerate}[label=(\alph*)]
+
+	\item give an estimation of $f$ (the sequential part of the code that can not be parallelized). 
+
+{\it
+	$f$ is defined by the sequential part of the code. In this example, we assume it is only representing the initialization phase. Thus, By computing  $t/step$ times $n_steps$ for the smallest and the largest run we find $0$ s and $0.0618$ s for the initialization. It means $f = 0$ \% and $f = 0.02 $ \%. 
+}
+
+	\item What is the upper bound of the speedup in the case of Amdahl's law ? 
+
+{\it
+	With less than 1 \% of serial part, the speedup seems to be close to the perfect case. 
+}	
+
+\end{enumerate}
+  
+
+\end{exercise}
+
+
+
+\begin{exercise}[Theoretical analysis : Gustafsson's law]
+
+  $~$ % ugly trick to get a newline
+
+\begin{enumerate}[label=(\alph*)]
+	\item What would be the maximum efficiency of this parallel 2D poisson solver at 128 processors ?
+
+{\it
+	Close to 100 \% .
+}	
+
+
+\end{enumerate}
+  
+
+\end{exercise}
+
+
+\end{document}
+

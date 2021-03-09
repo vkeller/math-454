@@ -1,0 +1,36 @@
+#!/bin/bash -l
+
+# Specify the project
+#$-P krcs
+
+# Specify time limit
+#$-l h_rt=48:00:00
+
+#Specify number of GPUs
+#$-l gpus=1
+
+#GPU capabiility
+#$-l gpu_c=6.0
+
+#Send me email when job is done
+#$-m e
+
+#Give job a name
+#$-N dl
+
+#Join output and error streams
+#$-j y
+
+
+#load all necessary modules and env:
+module load cuda/8.0
+module load anaconda2
+
+export CONDA_ENVS_PATH=/project/vkolagrp/anaconda/:/share/pkg/anaconda2/4.2.0/install/envs/
+source activate deeplearningenv
+
+export THEANO_FLAGS='mode=FAST_RUN,device=gpu'
+
+python fibrosis_cnn_transfer_learning.py
+ 
+

@@ -1,0 +1,11 @@
+rm -f cuGEMMresults_fb3.txt
+cuGEMM_test 1000 > cuGEMMresults_fb3.txt
+cuGEMM_test 2000 >> cuGEMMresults_fb3.txt
+cuGEMM_test 3000 >> cuGEMMresults_fb3.txt
+cuGEMM_test 4000 >> cuGEMMresults_fb3.txt
+cuGEMM_test 5000 >> cuGEMMresults_fb3.txt
+cuGEMM_test 6000 >> cuGEMMresults_fb3.txt
+cuGEMM_test 7000 >> cuGEMMresults_fb3.txt
+cuGEMM_test 8000 >> cuGEMMresults_fb3.txt
+cuGEMM_test 9000 >> cuGEMMresults_fb3.txt
+cuGEMM_test 10000 >> cuGEMMresults_fb3.txt

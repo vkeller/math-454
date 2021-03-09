@@ -1,0 +1,22 @@
+% Slide 41
+\begin{tikzpicture}[node distance=8mm,
+dots/.style={
+  font=\sffamily,
+  xshift=5mm,
+  minimum width=1cm
+},
+node split/.append style = {xshift=5mm}
+]
+
+\tikzstyle{sample} = [-,thin]
+
+  \node (node0)  [node split,]                  {$P_0$ \nodepart{second} $M_0$};
+  \node (node1)  [node split,right of=node0]    {$P_1$ \nodepart{second} $M_1$};
+  \node (dots)   [dots,right of=node1]          {$\ldots$};
+  \node (nodeN)  [node split,right of=dots]     {$P_N$ \nodepart{second} $M_N$};
+  \node (switch) [switch,below of=node1, xshift=6mm, yshift=-1cm]  {network or switch};
+
+\path[sample] (node0.south) edge[out=-60,in=120] (switch.north);
+\path[sample] (node1.south) edge[out=-60,in=120] (switch.north);
+\path[sample] (nodeN.south) edge[out=-60,in=120] (switch.north);
+\end{tikzpicture}

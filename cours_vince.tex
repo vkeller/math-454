@@ -1,0 +1,147 @@
+\documentclass{beamer}
+\usepackage{etex}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+%\usepackage{floatrow}
+%\usepackage[style=boxed,font=small]{floatrow}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{ulem}
+%\usepackage{pgf,pgffor,pgfkeys,tikz,pgfplots}
+\usepackage{tikz}
+\usepackage{fancyvrb}
+\usepackage{colortbl}
+\usepackage{booktabs}
+\usepackage{pgf}
+\usepackage{tikzstyles}
+\usepackage{blindtext}
+\usepackage{soul}
+
+%\usepackage{skull}
+
+\usetikzlibrary{positioning,shapes,shadows,arrows,matrix,calc,fit,backgrounds}
+
+% =============================
+
+\newcommand{\pgn}{\pgfmatrixnextcell}
+%\newfloatcommand{capbtabbox}{table}[][\FBwidth]
+
+% =============================
+
+
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{rgb}{0,.5,0}
+\definecolor{colString}{rgb}{1,0,0}
+\lstset{%
+    basicstyle=\ttfamily, %
+    identifierstyle=\color{colIdentifier}, %
+    keywordstyle=\color{colKeys}, %
+    stringstyle=\color{colString}, %
+    commentstyle=\color{colComments}, %
+    columns=flexible, %
+    tabsize=4, %
+    frame=single, %
+    extendedchars=true, %
+    showspaces=false, %
+    showtabs=true,
+    showstringspaces=false, %
+    numbers=left, %
+    numberstyle=\tiny, %
+    breaklines=true, %
+    breakautoindent=true, %
+    captionpos=b,
+    language=Python
+}
+\usetheme{default}
+
+\setbeamercolor{structure}{fg=black}
+\setbeamercolor*{titlelike}{fg=black}
+
+\setbeamertemplate{navigation symbols}{}%remove navigation symbols
+
+
+\setbeamertemplate{background}{\includegraphics[width=\paperwidth]{images/scitas-bg-1.pdf}}
+
+\definecolor{dkred}{rgb}{.68,0,.06} % ae0010
+\definecolor{dkgreen}{rgb}{.13,.57,.33}
+
+%\title{Optimization on one core \\OpenMP, MPI and hybrid programming \\ \textit{An introduction to the de-facto industrial standards}}
+%\title{Parallel programming \\Doctoral course PHYS-743}
+\title{Parallel and High Performance Computing\\MATH-454}
+%\author{Vincent Keller \\ Nicolas Richart}
+%\title{Compilation - Optimization : a small reminder}
+%\author{Vincent Keller \\ Nicolas Richart \\ (Ewan Roche -- Massimiliano Culpo)}
+\author{Vincent Keller \\ Nicolas Richart}
+\date{\today}
+
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\setbeamertemplate{background}{\includegraphics[width=\paperwidth]{images/scitas-bg.pdf}}
+
+\setbeamercolor{structure}{fg=dkred}
+
+
+\begin{frame}
+\frametitle{Table of Contents}
+%\tableofcontents[currentsection]
+\tableofcontents[hideallsubsections] 
+\end{frame}
+
+\section{Performance and performance modeling}
+\input{DayGilles/performance.tex}
+
+
+%\section{Theory of serial computing}
+%\input{Day0/program.tex}
+%\input{Day0/introductory-remarks.tex}
+%\input{Day0/architecture.tex}
+%\section{Compilation}
+%\input{Day2/compilation.tex}
+%\input{Day2/compilation-simple.tex}
+
+%\section{Debug - Profile - Optimize - (Parallelize)}
+%\input{Day1/optim.tex}
+
+%\section{Theory of parallel computing}
+%\input{Day0/introduction-tale.tex}
+%\input{Day0/theory.tex}
+
+%\section{Parallelization with OpenMP}
+%\input{Day1/openmp.tex}
+%\input{Day1/openmp-simple.tex}
+
+%\section{MPI basics}
+%\input{Day2/mpi-basics.tex}
+
+%\section{MPI advanced}
+%\input{Day3/mpi-advanced.tex}
+
+%\section{Hybrid programming}
+%\input{Day4/hybrid.tex}
+
+%\section{Project proposals propositions}
+%\input{Day4/projectproposal.tex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Pour le cours PHPC
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\section{Projects}
+%\input{Day2/projects-presentation.tex}
+
+%\section{Week 5 : CUDA Fortran}
+%\input{Day5/cuda-fortran.tex}
+
+
+
+
+
+\end{document}

@@ -1,0 +1,3 @@
+/home/vkeller/ownCloud/SCITAS/PHPC-2020/PROJECTS/CG/GENMAT/matrix-market-suite/build/CMakeFiles/edit_cache.dir
+/home/vkeller/ownCloud/SCITAS/PHPC-2020/PROJECTS/CG/GENMAT/matrix-market-suite/build/CMakeFiles/rebuild_cache.dir
+/home/vkeller/ownCloud/SCITAS/PHPC-2020/PROJECTS/CG/GENMAT/matrix-market-suite/build/CMakeFiles/MM-Suite.dir

@@ -1,0 +1,15 @@
+% Slide 210
+\begin{tikzpicture}[xscale = 0.8]
+
+
+\foreach \x/\c[count = \i from 0] in {0/blue8, 3/blue4, 6/yellowbrown4, 9/yellowbrown2} {
+	\node[outer sep = 3pt, fill = \c!40!white, circle, draw, inner sep = 5pt] (\i) at (\x, 4) {\i};
+	\fill[\c!40!white] (\x, 0) rectangle (\x + 3, 0.5);
+	\draw[->] (\i) -- (\x, 0.55);
+}
+
+\node[anchor = west] at (9, 2) {\texttt{MPI\_File\_Write()}};
+
+\draw[step = 0.5cm] (0,0) grid (12, 0.5);
+
+\end{tikzpicture}

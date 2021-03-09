@@ -1,0 +1,11 @@
+#!/bin/bash -l
+
+# load modules
+module load cuda/5.0
+module load R/3.2.0
+
+# compile and build the library
+gcc -std=gnu99 -I$R_HOME/include -I/usr/local/include -fpic -g -O2 -c avg_wrap.c -o avg_wrap.o
+nvcc -g -G -O2 -gencode arch=compute_20,code=sm_20 -I$R_HOME/include -I/usr/local/include -Xcompiler -fpic -c avg.cu avg.o
+nvcc -shared -Xlinker -L$R_HOME/lib -lR -L/usr/local/apps/cuda-5.0/lib64 -o avg_wrap.so avg_wrap.o avg.o
+

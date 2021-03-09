@@ -1,0 +1,173 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{a4wide}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{pcptex}
+\usepackage{xspace}
+\usepackage[toc,page]{appendix}
+
+
+\begin{document}
+
+\pptitle{A High Performance Implementation of a 2D Elliptic Equation Solver: the Poisson's Equation Case at Scale}
+
+\ppintro{Vincent Keller}{EPFL-SCITAS}{Station 1, CH-1015 LAUSANNE}{Only PI}{May 9, 2016}{July 1, 2016}{Mount Everest}{POISSON}
+
+
+\ppabstract{
+Solving the Poisson equation has been largely investigated during the past decades. In this case, we present a fully functional parallel implementation of a 2D stencil-based scheme that solves the Poisson equation. Our application is coded in C and uses the industrial standards MPI and OpenMP in its hybrid implementation. Several $f$ functions will be calculated. 
+}
+
+\section{Scientific Background}
+
+A parallel iterative finite difference method for solving the 2D elliptic PDE Poisson's equation on a distributed system using Message Passing Interface (MPI) and OpenMP is presented. This method is based on a domain decomposition where the global 2D domain is divided into multiple sub-domains using horizontal axis. The number of subdomains is specified by the number of processes. The Poisson's equation is solved by explicit iterative schemes. The global error is shared by all processes.
+\\
+
+The Poisson's equation is:
+
+\begin{equation}
+\Delta \varphi = f
+\end{equation}
+
+that is in 2D
+
+\begin{equation}
+\left( \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} \right) \varphi(x,y) = f(x,y)\label{pde}
+\end{equation}
+
+with $\partial \Omega = 0$
+
+The equation is discretized on a 2D rectangular domain of size $NxN$. We use centered finite differences to approximate (\ref{pde}). This will lead to a linear system $Ax = b$. Using a Jacobi iterative method to solve it and expressing $\varphi^{k+1}$ as a function of $\varphi^k$ , we obtain
+
+\begin{equation}
+\varphi_{i,j}^{k+1} = \frac{1}{4} \left( \varphi_{i+1,j}^{k} + \varphi_{i-1,j}^{k} + \varphi_{i,j+1}^{k} + \varphi_{i,j-1}^{k} -f_{i,j} h^2 \right)
+\end{equation}
+
+where $h = \frac{1}{N+1}$
+
+For our preliminary results, we set $f_{i,j} = -2 \pi^2 sin(\pi i h) * sin (\pi j h) $
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=6cm]{poisson.png}
+\end{center}
+\caption{\label{poissonfigure}Solution of the Poisson Equation with $N=512$, $l2=0.005$, $iteration=1018$}
+\end{figure}
+
+
+\section{Implementations}
+
+The application is implemented in C~\cite{ritchie}. We have investigated three implementations of the same solver :
+
+\begin{itemize}
+\item A shared memory version using the OpenMP paradigm~\cite{openmp}
+\item A distributed memory version using the MPI library~\cite{mpi}
+\item An hybrid version using both MPI and OpenMP where the checkpoint files are written in binary using MPI-IO.
+\end{itemize}
+
+The code has been fully debugged using the \texttt{gdb} debugger. The \texttt{Valgrind} tool has been used to remove all the memory leaks. 
+
+\subsection{Optimizations}
+
+Beside the standard sequential optimizations (loop reordering, vectorization, etc..), we put a special effort to tackle the main bottleneck of the beta-versions of the MPI and hybrid implementations : the I/O part. The current production version implements a BMP-file writer in parallel using MPI-IO. 
+
+\section{Prior results}
+
+We ran our production version on the Bellatrix cluster at EPFL. This machine presents the following characteristics~\cite{scitas} : 
+
+\begin{itemize}
+\item 424 compute nodes each with 2 Intel 8-cores Sandy-Bridge CPU running at
+  2.2 GHz, with 32 GB of memory
+\item Infiniband QDR 2:1 connectivity
+\item GPFS filesystem
+\item Total peak performance : 119 TF
+\end{itemize}
+
+\subsection{Strong scaling}
+
+\textbf{\texttt{!! FIXME !!}}
+
+\subsection{Weak scaling}
+
+\textbf{\texttt{!! FIXME !!}}
+
+
+\section{Resources budget}
+
+In order to fulfill the requirements of our project, we present hereafter the resource budget. 
+
+\subsection{Computing Power}
+
+\textbf{\texttt{!! FIXME !!}}
+
+\subsection{Raw storage}
+
+\textbf{\texttt{!! FIXME !!}}
+
+\subsection{Grand Total}
+
+\begin{center}
+\begin{tabular}{| l | l |}
+	\hline
+	Total number of requested cores & \textbf{\texttt{!! FIXME !!}}\\
+	\hline
+	Minimum total memory & \textbf{\texttt{!! FIXME !!}} \\
+	\hline
+	Maximum total memory & \textbf{\texttt{!! FIXME !!}} \\
+	\hline
+	Temporary disk space for a single run & \textbf{\texttt{!! FIXME !!}} \\
+	\hline
+	Permanent disk space for the entire project & \textbf{\texttt{!! FIXME !!}} \\
+	\hline
+	Communications & \textbf{\texttt{!! FIXME !!}} \\
+	\hline
+	License & own code (BSD) \\
+	\hline
+	Code publicly available ? & \textbf{\texttt{!! FIXME !!}} \\
+	\hline
+	Library requirements & \textbf{\texttt{!! FIXME !!}} \\
+	\hline
+	Architectures where code ran & \textbf{\texttt{!! FIXME !!}}  \\
+	\hline
+\end{tabular}
+\end{center}
+\section{Scientific outcome}
+
+This work will (probably) lead to a good grade for its author. Additionnaly, the present project proposal example can be reused in the future for a real submission at EPFL or in a larger high performance computing center such as the Swiss National Supercomputing Center CSCS in Lugano. 
+
+\begin{thebibliography}{1}
+
+\bibitem{ritchie} Kernighan, Brian W. and Ritchie, Dennis M.,{\em The C Programming Language Second Edition}, Prentice-Hall, Inc.,1988
+
+\bibitem{openmp} Dagum L. and Menon R.,{\em  OpenMP: An Industry-Standard API for Shared-Memory Programming}, IEEE Computational Science \& Engineering, Volume 5 Issue 1, pp 46-55, January 1998
+
+\bibitem{mpi} The MPI Forum, {\em MPI: A Message-Passing Interface Standard}, Technical Report, 1994
+
+\bibitem{scitas} Scientific IT and Application Support, \url{http://scitas.epfl.ch}, 2015
+
+\end{thebibliography}
+
+
+\begin{appendices}
+\section{Vincent Keller, PhD -- CV}
+
+Vincent Keller is a computer scientist born in Lausanne, Switzerland. He received his Master degree in Computer Science from the University of Geneva (Switzerland) in 2004. From 2004 to 2005, he holds a full-time researcher position at the University Hospital of Geneva (HUG). He was involved at HUG on simulating blood flows in cerebral aneurysms using real geometries constructed from 3D X-rays tomography slices. The numerical method used was Lattice-Boltzman Method (LBM). He received his PhD degree in 2008 from the École Polytechnique Fédérale de Lausanne (EPFL) in the HPCN and HPC Grids fields. His supervisor was Dr. Ralf Gruber. He developed a low-level application-oriented monitoring system (VAMOS) and the Resource Broker of the ïanos (Intelligent ApplicatioN-Oriented System) framework prototype. In 2009, he holds a full-time researcher position at Fraunhofer SCAI (University of Bonn) in Germany. He was the Scientific Coordinator of the IANOS project. In 2010, he was application analyst in the IT service at University of Zürich. Between September 2010 and September 2014, he was application analyst in the Center for Advanced Modeling Science (CADMOS) for the EPFL\&University of Lausanne projects. Since September 2014, he is full member of the SCITAS (Scientific IT and Application Support) team led by Prof. Jan Hesthaven and Dr. Vittoria Rezzonico. Dr. Vincent Keller is the author or coauthor of more than 30 peer-reviewed papers and one book (HPC@GreenIT, Springer Verlag, Heidelberg, Germany, October 2010). His research interests are in HPC applications analysis, Grid and cluster computing and energy efficiency of large computing ecosystems.
+\\
+
+Areas of expertise :
+
+\begin{itemize}
+\item{ High Performance Computing, Computational Science and Engineering }
+\item{ Parallel computing }
+\item{ Optimization, Parallelization, Parallel I/O, Scientific Libraries }
+\item{ Scientific Applications and Performance Analysis, Algorithms }
+\item{ Energy Efficiency in Large Computing Ecosystems }
+\end{itemize}
+
+
+\end{appendices}
+
+
+
+
+\end{document}
