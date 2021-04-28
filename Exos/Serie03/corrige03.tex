@@ -73,6 +73,11 @@ Ridge point: $2.23 $ [flops/Byte]
 \item Ridge point : $2.2$ [flops/Byte]
 \end{itemize}
 
+We assume that the theoretical peak memory bandwidth is the one on the CPU, i.e. with stream we saturate the CPU output rather than the RAM bus. It means that the node is well balanced.  
+\\
+
+\url{https://en.wikichip.org/wiki/intel/microarchitectures/broadwell_(client)}
+
 \end{exercise}
 
 \begin{exercise}[Jacobi stencil]
@@ -85,6 +90,7 @@ For 28 cores :
 \item Theoretical : $1164.8$ [Gflops/s], measured : $646.2$ [Gflops/s]
 \item Theoretical : $15.1$ [flops/Byte], measured : $5.3$ [flops/Byte]
 \end{enumerate}
+
 
 \end{exercise}
 
