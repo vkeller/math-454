@@ -1,0 +1,26 @@
+Debug : https://www.youtube.com/watch?v=DQEVZ5efnO0
+Very good comparaison with a doctor/surgeon and a software developer. Forget JavaScript and keep the 7 fundamentals. 
+
+Debug C with GDB : https://www.youtube.com/watch?v=gFCQ37jVN3g
+
+Profile https://www.youtube.com/watch?v=F8evu-ybDfY
+
+Optimization:
+
+OpenMP 
+https://www.youtube.com/watch?v=DjEbLYVofRA
+
+
+
+Differences
+
+gcc -fopenmp
+icc -qopenmp
+
+vtune can be also find under the name of Intel Amplifier
+
+
+Debug - Profile - Optimize - Parallel
+
+matmul.c is the full matrix multiplication C = A B where A, B, C are full matrices.
+pi.c will be extensively seen during the exercises. 
